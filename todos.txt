@@ -1,5 +1,4 @@
 pinapples
-swim
-game
-
+walking
+sleep
 run

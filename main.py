@@ -16,7 +16,7 @@ while True:
             item = item.strip('\n')
             print(f"{i + 1}. {item.capitalize()}")
     elif 'edit' in user_action:
-        number = int(input("Select an item number to edit"))
+        number = int(user_action[5:])
         number = number - 1
         with open('todos.txt', 'r') as file:
             todos = file.readlines()
@@ -26,21 +26,26 @@ while True:
             file.writelines(todos)
         print('Edit successful')
     elif 'complete' in user_action:
+        number = int(user_action[9:])
         with open('todos.txt', 'r') as file:
             todos = file.readlines()
-        for i, item in enumerate(todos):
-            item = item.strip('\n')
-            print(f"{i + 1}. {item.capitalize()}")
-        un = int(input("what item number would you like to mark as complete?"))
-        with open('todos.txt', 'r') as file:
-            todos = file.readlines()
-            rem = todos[un - 1].strip('\n')
-            todos.pop(un - 1)
+            index = number -1
+            todo_to_remove = todos[index].strip('\n')
+            todos.pop(index)
+       # for i, item in enumerate(todos):
+        #    item = item.strip('\n')
+         #   print(f"{i + 1}. {item.capitalize()}")
+ #       un = int(input("what item number would you like to mark as complete?"))
+ #       with open('todos.txt', 'r') as file:
+  #          todos = file.readlines()
+    #        rem = todos[un - 1].strip('\n')
+     #       todos.pop(un - 1)
         for i, item in enumerate(todos):
             item = item.strip('\n')
         with open('todos.txt', 'w') as file:
             file.writelines(todos)
-        print(rem, "has been removed!")
+        message = f"Todo {todo_to_remove} has been removed from list."
+        print(message)
     elif 'exit' in user_action:
         break
 print("Bye!")
